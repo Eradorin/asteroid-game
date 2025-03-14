@@ -3,7 +3,10 @@
 # throughout this file
 import pygame
 from constants import *
-#import time
+from player import *
+
+clock = pygame.time.Clock()
+dt = 0
 
 def main():
 
@@ -13,16 +16,17 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-   # time.sleep(0.5)
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, PLAYER_RADIUS)
 
     while True:
+        dt = clock.tick(60) / 1000
         for event in pygame.event.get():
-            #print(f"Event: {event.type}")
             if event.type == pygame.QUIT:
-               # print("Quit event detected")
                 return
-            
+                    
+        player.update(dt)
         screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
 
 if __name__ == "__main__":
