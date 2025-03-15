@@ -42,6 +42,13 @@ def main():
                 print("Game over!")
                 import sys
                 sys.exit()
+
+        for asteroid in asteroids:
+            for shot in shots_group:
+                if shot.collides_with(asteroid):
+                    asteroid.split()
+                    shot.kill()
+
         for shot in shots_group:
             shot.update(dt)
 
